@@ -15,3 +15,6 @@
 (test (factorial-iterative 4) 24)
 (test (factorial-iterative 5) 120)
 
+(test (Ackermann 1 10) 1024)
+(test (Ackermann 2 4) 65536)
+(test (Ackermann 3 3) 65536)
