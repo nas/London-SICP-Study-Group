@@ -1,25 +1,5 @@
 #lang scheme
-; implement few test methods, and evolve them as I move forward
-
-(define (test-falsiness evaluation)
-  (if evaluation false true)
-)
-
-(define (test-truthiness evaluation)
-  (if evaluation true false)
-)
-  
-(define (test actual-call expectation)
-  (= actual-call expectation)
-)
-
-(define (test-upper-bound actual-call expectation)
-  (if (test actual-call expectation)
-      true
-      (and (> actual-call expectation) (< actual-call (+ expectation 1) ))
-      )
-)
-
+(require "test.scm")
 
 ; exercise 1.1
 
