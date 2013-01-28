@@ -4,6 +4,8 @@
 (provide factorial-recursive)
 (provide factorial-iterative)
 (provide Ackermann)
+(provide fib-recursive)
+(provide fib-iterative)
 
 ; example
 (define (factorial-recursive n)
@@ -44,3 +46,25 @@
                  (Ackermann x (- y 1)))
               ))
   )
+
+; example recursive fibonacci
+(define (fib-recursive n)
+  (cond ((= n 0) 0)
+        ((= n 1) 1)
+        (else (+ (fib-recursive (- n 1))
+                 (fib-recursive (- n 2))
+                 )
+              )
+        )
+  )
+
+; example iterative fibonacci
+(define (fib-iterative n)
+  (define (iter num1 num2 count)
+    (cond ((= count 0) num2)
+          (else
+           (iter (+ num1 num2) num1 (- count 1)))
+    ))
+  (iter 1 0 n)
+)
+                                
