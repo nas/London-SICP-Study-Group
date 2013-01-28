@@ -1,7 +1,7 @@
 #lang scheme
 
 (require "test.scm")
-(require "chapter1_1.scm")
+(require "../chapter1_1.scm")
 
 (test-falsiness (= a b))
 

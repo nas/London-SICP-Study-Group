@@ -1,5 +1,5 @@
 #lang scheme
-(require "test.scm")
+(require "helper-functions.scm")
 
 ;FOR TEST SCRIPT :: START
 (provide a)
@@ -76,9 +76,6 @@
 (define (sum-of-squares a b)
   (+ (square a) (square b)))
 
-(define (square a)
-  (* a a))
-
 ; exercise 1.4, describe the behaviour of the following
 (define (a-plus-abs-b a b)
   ((if (> b 0) + -) a b))
@@ -99,9 +96,6 @@
 
 (define (improve guess x)
   (average guess (/ x guess)))
-
-(define (average a b)
-  ( / (+ a b) 2))
 
 (define (new-if predicate then-clause else-clause)
   (cond (predicate then-clause)
