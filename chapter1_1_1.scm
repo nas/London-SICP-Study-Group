@@ -87,7 +87,7 @@
   (if (= x 0)
       0
       y)
-  )
+  ) 
 
 ; exercise 1.6
 ; with new-if using cond
