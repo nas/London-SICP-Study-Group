@@ -1,6 +1,15 @@
 #lang scheme
 (require "test.scm")
 
+;FOR TEST SCRIPT :: START
+(provide a)
+(provide b)
+(provide cubert)
+(provide max-sum-of-squares)
+(provide sqrt)
+(provide new-if)
+;FOR TEST SCRIPT :: END
+
 ; exercise 1.1
 
 10
@@ -18,8 +27,6 @@
 (define b (+ a 1))
 
 (+ a b (* a b))
-
-(test-falsiness (= a b))
 
 (if (and (> b a) (< b (* a b)))
   b
@@ -72,14 +79,6 @@
 (define (square a)
   (* a a))
 
-;test 1.3
-(test (max-sum-of-squares 2 3 4) 25)
-(test (max-sum-of-squares 3 2 4) 25)
-(test (max-sum-of-squares 3 4 2) 25)
-(test (max-sum-of-squares 2 4 4) 32)
-(test (max-sum-of-squares 4 4 2) 32)
-(test (max-sum-of-squares 4 2 4) 32)
-
 ; exercise 1.4, describe the behaviour of the following
 (define (a-plus-abs-b a b)
   ((if (> b 0) + -) a b))
@@ -108,19 +107,15 @@
   (cond (predicate then-clause)
         (else else-clause)))
 
-  ; test new-if
-(test (new-if (= 2 3) 0 5) 5)
-(test (new-if (= 2 2) 0 5) 0)
-
 (define (sqrt-iter guess x) ; don't run this, infinite recursion
   (new-if (good-enough? guess x)
           guess
           (sqrt-iter (improve guess x)
                      x)))
 
-
 ; exercise 1.7
 ; change good to stop when the difference is very small
+
 (define (sqrt num)
   (define (good-enough? previous-guess guess) ; another way to implement good-enough is in exercise 1.6
     (< (abs (- previous-guess guess)) 0.000001))
@@ -134,15 +129,9 @@
         (sqrt-iterator guess (improve guess))))
   (sqrt-iterator 2.0 1.0))
 
-(test-upper-bound (sqrt 2) 1.4)
-(test-upper-bound (sqrt 9) 3)
-(test-upper-bound (sqrt 25) 5)
-(test-upper-bound (sqrt 16) 4)
-(test-upper-bound (sqrt 1000000) 1000)
-(test-upper-bound (sqrt 0.01) 0.0001)
-
 ; exercise 1.8
 ; (/ (+ (/ x (square y)) (* 2 y)) 3)
+
 (define (cubert num)
   (define (good-enough? previous-guess guess)
     (< (abs (- previous-guess guess)) 0.000001))
@@ -155,7 +144,3 @@
         guess
         (sqrt-iterator guess (improve guess))))
   (sqrt-iterator 2.0 1.0))
-
-(test-upper-bound (cubert 125) 5)
-(test-upper-bound (cubert 27) 3)
-(test-upper-bound (cubert 1000) 10)
