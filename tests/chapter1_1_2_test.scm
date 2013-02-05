@@ -70,3 +70,39 @@
 (test (pascal-triangle-element 2 6) 5)
 (test (pascal-triangle-element 3 6) 10)
 
+(test (expt-recur 1 1) 1)
+(test (expt-recur 2 2) 4)
+(test (expt-recur 3 3) 27)
+(test (expt-recur 4 4) 256)
+(test (expt-recur 5 5) 3125)
+
+(test (expt-iter 1 1) 1)
+(test (expt-iter 2 2) 4)
+(test (expt-iter 3 3) 27)
+(test (expt-iter 4 4) 256)
+(test (expt-iter 5 5) 3125)
+
+(test (fast-expt 1 1) 1)
+(test (fast-expt 2 2) 4)
+(test (fast-expt 3 3) 27)
+(test (fast-expt 4 4) 256)
+(test (fast-expt 5 5) 3125)
+
+(test (fast-expt-iter 1 1) 1)
+(test (fast-expt-iter 2 2) 4)
+(test (fast-expt-iter 3 3) 27)
+(test (fast-expt-iter 4 4) 256)
+(test (fast-expt-iter 5 5) 3125)
+
+(test (multiply 2 4) 8)
+(test (multiply 2 9) 18)
+(test (multiply 4 6) 24)
+
+(test (fast-multiply 2 4) 8)
+(test (fast-multiply 2 9) 18)
+(test (fast-multiply 4 6) 24)
+
+(test (rpm-multiply 2 4) 8)
+(test (rpm-multiply 5 9) 45)
+(test (rpm-multiply 24 16) 384)
+

@@ -1,6 +1,6 @@
 #lang scheme
 
-
+(require "helper-functions.scm")
 (provide factorial-recursive)
 (provide factorial-iterative)
 (provide Ackermann)
@@ -10,6 +10,13 @@
 (provide f-recursive)
 (provide f-iterative)
 (provide pascal-triangle-element)
+(provide expt-recur)
+(provide expt-iter)
+(provide fast-expt)
+(provide fast-expt-iter)
+(provide multiply)
+(provide fast-multiply)
+(provide rpm-multiply)
 
 ; example
 (define (factorial-recursive n)
@@ -123,4 +130,76 @@
       1
       (+ (pascal-triangle-element (- column 1) (- row 1)) (pascal-triangle-element column (- row 1)))
   )
+)
+
+; example exponentiation(recursive)
+(define (expt-recur b n)
+  (if (= n 0)
+      1
+      (* b (expt n (- n 1)))
+  )
+ )
+
+; example exponentiation (iterative)
+(define (expt-iter b n)
+  (define (iter counter product)
+    (if (= counter 0)
+        product
+        (iter (- counter 1)
+              (* b product))))
+(iter n 1)
+  )
+
+; example fast-exponentiation using squares
+(define (fast-expt b n)
+  (cond ((= n 0) 1)
+        ((even? n) (square (fast-expt b (/ n 2))))
+        (else (* b (fast-expt b (- n 1)))
+              )))
+
+
+; exercise 1.16 fast-exponentiation using squares and iterative algo.
+(define (fast-expt-iter base exp)
+  (define (iter new-base counter a)
+    (cond ((= counter 0) a)
+          ((even? counter) (iter (square new-base) (/ counter 2) a))
+          (else (iter new-base (- counter 1) (* a new-base))))
+  )
+  (iter base exp 1)
+)
+
+; exercise 1.17
+(define (multiply a b)
+  (if (= b 0)
+      0
+      (+ a (multiply a (- b 1) )))
+)
+; change the above procedure, to include, together with addition, operations double, which doubles an
+; integer, and halve, which dvides an even integer by 2. (hence achieve logarithmic # of steps)
+(define (fast-multiply a b)
+  (cond ((= b 0) 0)
+        ((even? b) (double (fast-multiply a (half b))))
+        (else (+ a (fast-multiply a (- b 1) )))
+        )
+  )
+      
+   
+; exercise 1.18
+; Using the results of exercises 1.16 & 1.17 , devise a procedure that generates an iterative process
+; for multiplying two integers in terms of adding, doubling and halving & uses a logarithmic number of steps
+; Russian peasant method of multiplication
+(define (rpm-multiply a b)
+  (define (values new-a new-b existing-value)
+    (cond ((even? (floor new-a)) existing-value)
+          (else (+ new-b existing-value)))
+   )
+  
+  (define (iter new-a new-b value)
+    (cond ((= new-b 0) 0)
+          ((= (floor new-a) 0) value)
+          (else (iter (half new-a) (double new-b) (values new-a new-b value)))
+    )
+  )
+  
+  (iter a b 0)
 )
