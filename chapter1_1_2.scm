@@ -17,6 +17,9 @@
 (provide multiply)
 (provide fast-multiply)
 (provide rpm-multiply)
+(provide fib-119)
+(provide gcd)
+(provide prime?)
 
 ; example
 (define (factorial-recursive n)
@@ -202,4 +205,58 @@
   )
   
   (iter a b 0)
+)
+
+; exercise 1.19
+; a1 = (bq + aq + ap)
+; b1 = (bp + aq)
+; a2 = (b1q + a1q + a1p)
+; b2 = (b1p + a1q)
+; simplify using substitution -> 
+; a2 = ((bp + aq)q + (bq + aq + ap)q + (bq + aq + ap)p)
+; b2 = ((bp + aq)p + (bq + aq + ap)q)
+;    = (bpp + aqp) + (bqq + aqq + apq)
+;    = (b(pp + qq) + (a(qp + pq + qq)
+;    = b(pp + qq) + a(2pq + qq)
+; hence p' = pp + qq && q' = 2pq + qq -> (b2 = bp' + aq')
+; apply with a2 as well
+
+(define (fib-119 n)
+  (fib-iter-119 1 0 0 1 n)
+  )
+
+(define (fib-iter-119 a b p q count)
+  (cond ((= count 0) b)
+        ((even? count)
+         (fib-iter-119 a
+                   b
+                   (+ (square p) (square q)); this is the question,(compute p')
+                   (+ (* 2 p q) (square q)); and this (compute q')
+                   (/ count 2)))
+        (else (fib-iter-119 (+ (* b q) (* a q) (* a p))
+                        (+ (* b p) (* a q))
+                        p
+                        q
+                        (- count 1))))
+  )
+
+; example -> Euclid's Algorithm
+(define (gcd a b)
+  (if (= b 0)
+      a
+      (gcd b (remainder a b))))
+
+; example -> finding prime number
+(define (smallest-divisor n)
+  (find-divisor n 2)
+)
+
+(define (find-divisor n test-divisor)
+  (cond ((> (square test-divisor) n) n)
+        ((divides? test-divisor n) test-divisor)
+        (else (find-divisor n (inc test-divisor))))
+)
+
+(define (prime? n)
+  (= n (smallest-divisor n))
 )

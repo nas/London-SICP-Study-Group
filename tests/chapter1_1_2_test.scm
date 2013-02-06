@@ -106,3 +106,17 @@
 (test (rpm-multiply 5 9) 45)
 (test (rpm-multiply 24 16) 384)
 
+(test (fib-119 0) 0)
+(test (fib-119 1) 1)
+(test (fib-119 2) 1)
+(test (fib-119 3) 2)
+(test (fib-119 4) 3)
+(test (fib-119 5) 5)
+(test (fib-119 6) 8)
+(test (fib-119 7) 13)
+(test (fib-119 8) 21)
+
+(test (gcd 28 16) 4)
+(test (gcd 206 40) 2)
+
+(test-truthiness (prime? 3))
